@@ -34,6 +34,11 @@ exports.register = async (req, res, next) => {
         'INSERT INTO patients (user_id, age, gender, blood_group, emergency_contact, medical_history) VALUES (?, ?, ?, ?, ?, ?)',
         [userId, age || null, gender || null, bloodGroup || null, emergencyContact || null, medicalHistory || null]
       );
+    } else if (role === 'doctor') {
+      await pool.query(
+        'INSERT INTO doctors (user_id, specialty, experience) VALUES (?, ?, ?)',
+        [userId, req.body.specialty || 'General Physician', req.body.experience || '5 years']
+      );
     }
 
     // Generate JWT token
