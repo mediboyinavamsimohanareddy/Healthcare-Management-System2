@@ -1,3 +1,4 @@
+// SSL support for cloud MySQL databases (Aiven / AWS / PlanetScale)
 const mysql = require('mysql2/promise');
 require('dotenv').config();
 
@@ -9,7 +10,8 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || 'healthcare_management',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
 });
 
 module.exports = pool;
