@@ -1,0 +1,9 @@
+// Vercel deployment rewrite rules for React Router SPA
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
